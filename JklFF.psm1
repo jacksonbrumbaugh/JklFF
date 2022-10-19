@@ -5,8 +5,7 @@ $NonExportFolders = @(
 )
 
 $ExportFolders = @(
-  "MainCmds",
-  "UnderDev"
+  "MainCmds"
 )
 
 $LoadDirectories = @(
