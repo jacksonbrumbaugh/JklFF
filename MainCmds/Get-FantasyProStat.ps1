@@ -4,7 +4,7 @@ Pulls NFL stats from the Fantasy Pros website
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 20221018-C
+VersionCode: 20221031-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -16,14 +16,15 @@ function Get-FantasyProStat {
       "WR",
       "TE"
     )]
+    [Alias("P")]
     [string]
     $Position,
 
     [Parameter(Mandatory)]
     [ValidateRange(1, 18)]
+    [Alias("W")]
     [int]
     $Week
-
   ) # End block:param
 
   process {
@@ -40,10 +41,9 @@ function Get-FantasyProStat {
 
     try {
       $Response = Invoke-WebRequest -URI $URI
-    }
-    catch {
+    } catch {
       $ErrorDetails = @{
-        Message = "Failed to get the URI(" + $URI + ")"
+        Message = "Failed to call the URI(" + $URI + ")"
         ErrorAction = "Stop"
       }
 
@@ -168,3 +168,12 @@ function Get-FantasyProStat {
   } # End block:process
 
 } # End function
+
+$Aliases = @(
+  "gs"
+)
+
+foreach ( $ThisAlias in $Aliases ) {
+  Set-Alias -Name $ThisAlias -Value Get-FantasyProStat
+  Export-ModuleMember -Alias $ThisAlias
+}
