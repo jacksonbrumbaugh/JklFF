@@ -1,3 +1,8 @@
+<#
+NOTES
+Created by Jackson Brumbaugh on ?
+VersionCode: 20221110-A
+#>
 $ModulePath = $PSScriptRoot
 
 $NonExportFolders = @(
@@ -5,7 +10,8 @@ $NonExportFolders = @(
 )
 
 $ExportFolders = @(
-  "MainCmds"
+  "MainCmds",
+  "UnderDevCmds"
 )
 
 $LoadDirectories = @(
@@ -24,6 +30,8 @@ foreach ( $ThisDir in $LoadDirectories ) {
     }
   }
 
+  # DO NOT USE -Recurse
+  # Otherwise the HelperCmds children will be exported
   $LoadScripts = Get-ChildItem $ThisDir\*.ps1
   foreach ( $ThisScript in $LoadScripts ) {
     . $ThisScript.FullName
