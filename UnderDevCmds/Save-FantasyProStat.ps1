@@ -4,8 +4,12 @@ Scraps weekly NFL stats & saves to a JSON file
 
 .NOTES
 Created by Jackson Brumbaugh on 2022.11.13
+VersionCode: 22no13-A
 #>
 function Save-FantasyProStat {
+  <# Plan of Attack
+  add a switch parameter to also pass the stats thru at the CMD line while saving the JSON file
+  #>
   [CmdletBinding()]
   param (
     [Parameter(
