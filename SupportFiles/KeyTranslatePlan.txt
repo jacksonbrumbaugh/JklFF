@@ -1,0 +1,99 @@
+"20+": "Over20"
+"ATT": "Att.Rush"
+"CMP": "Comp"
+"FL": "Fum"
+"FPTS": "Pts"
+"FPTS/G": "Avg.Pts"
+"G": "Games"
+"INT": "Int"
+"LG": "Long"
+"PASSTD": "TD.Pass"
+"PASSYDS": "Yds.Pass"
+"PCT": "Perc"
+"Player": "Name"
+"Rank": "Rank"
+"REC": "Rec"
+"RECTD": "TD.Rec"
+"RECYDS": "Yds.Rec"
+"ROST": "Rost"
+"RUSHTD": "TD.Rush"
+"RUSHYDS": "Yds.Rush"
+"SACKS": "Sack"
+"TGT": "Tgt"
+"Y/A": "Avg.Yds.Att"
+"Y/R": "Avg.Yds.Rec"
+
+
+
+
+
+GOAL: The 'Bare Bone' stats / no XperY tpye of stats baked in
+{
+  "Name": "",
+  "Position": "",
+  "Pts": "",
+  "Rank": "",
+  "Games": "",
+  "Rostered": "",
+
+}
+
+
+## QB
+Rank
+Player
+CMP
+ATT
+PCT
+PASSYDS
+Y/A
+PASSTD
+INT
+SACKS
+RUSHYDS
+RUSHTD
+FL
+G
+FPTS
+FPTS/G
+ROST
+
+
+## RB
+Rank
+Player
+ATT
+RUSHYDS
+Y/A
+LG
+20+
+RUSHTD
+REC
+TGT
+RECYDS
+Y/R
+RECTD
+FL
+G
+FPTS
+FPTS/G
+ROST
+
+## WR & TE
+Rank
+Player
+REC
+TGT
+RECYDS
+Y/R
+LG
+20+
+RECTD
+ATT
+RUSHYDS
+RUSHTD
+FL
+G
+FPTS
+FPTS/G
+ROST

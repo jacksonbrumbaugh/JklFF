@@ -67,27 +67,7 @@ FPTS
 FPTS/G
 ROST
 
-## WR
-Rank
-Player
-REC
-TGT
-RECYDS
-Y/R
-LG
-20+
-RECTD
-ATT
-RUSHYDS
-RUSHTD
-FL
-G
-FPTS
-FPTS/G
-ROST
-
-
-## TE
+## WR & TE
 Rank
 Player
 REC

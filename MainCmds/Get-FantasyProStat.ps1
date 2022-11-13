@@ -4,7 +4,7 @@ Scraps weekly NFL stats from the Fantasy Pros website
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 20221113-A
+VersionCode: 20221113-D
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -78,8 +78,11 @@ function Get-FantasyProStat {
     $StatHeader = $Rows[1]
     $StatHeaderItems = $StatHeader.InnerHtml.split("`n")
 
-    # BUG
-    # Need to properly label PassTD vs RushTD vs RecTD
+    <#
+    Using the Prior Stat Name as a guide for what the current stat name will be
+    Example
+    For QB's, Passing Yds stat follows the PCT (or completion percentage) stat
+    #>
     $PriorStatName = ""
     $StatKeys = foreach ( $ThisStat in $StatHeaderItems ) {
       $StatNoSmall = $ThisStat -replace "<SMALL>", "" -replace "</SMALL>", ""
@@ -89,9 +92,9 @@ function Get-FantasyProStat {
 
       if ( $StatName -eq "YDS" ) {
         $ThisStatKey = switch ( $PriorStatName ) {
-          "PCT" { "PASS" + $StatName }
-          "ATT" { "RUSH" + $StatName }
-          "TGT" { "REC" + $StatName }
+          "PCT" { "PASS" + $StatName } # For QB
+          "ATT" { "RUSH" + $StatName } # For RB
+          "TGT" { "REC" + $StatName }  # For WR & TE
           Default { $StatName }
         }
       }
@@ -99,7 +102,7 @@ function Get-FantasyProStat {
       if ( $StatName -eq "TD" ) {
         if ( $Position -eq "QB" ) {
           $ThisStatKey = switch ( $PriorStatName ) {
-            "Y/A" { "PASS" + $StatName }
+            "Y/A" {"PASS" + $StatName }
             "YDS" { "RUSH" + $StatName }
             Default { $StatName }
           }
@@ -121,22 +124,60 @@ function Get-FantasyProStat {
           }
         }
 
+      } # End block:if StatName is TD
+
+      if ( $StatName -eq "Y/A" ) {
+        $ThisStatKey = switch ( $Position ) {
+          "QB" { "YdsPerPass" }
+          "RB" { "YdsPerRush" }
+          Default { $ThisStatKey}
+        }
       }
 
       $PriorStatName = $StatName
 
-      # Add this as part of StatKeys
+      $Replaces = @(
+        @{ Old = "20+"    ; New = "Over20" },
+        @{ Old = "ATT"    ; New = "Rush" },
+        @{ Old = "CMP"    ; New = "Comp" },
+        @{ Old = "FL"     ; New = "Fum" },
+        @{ Old = "FPTS"   ; New = "Pts" },
+        @{ Old = "FPTS/G" ; New = "AvgPts" },
+        @{ Old = "G"      ; New = "Games" },
+        @{ Old = "INT"    ; New = "Int" },
+        @{ Old = "LG"     ; New = "Long" },
+        @{ Old = "PASSTD" ; New = "PassTD" },
+        @{ Old = "PASSYDS"; New = "PassYds" },
+        @{ Old = "PCT"    ; New = "Perc" },
+        @{ Old = "Player" ; New = "Name" },
+        @{ Old = "REC"    ; New = "Rec" },
+        @{ Old = "RECTD"  ; New = "RecTD" },
+        @{ Old = "RECYDS" ; New = "RecYds" },
+        @{ Old = "ROST"   ; New = "Rost" },
+        @{ Old = "RUSHYDS"; New = "RushYds" },
+        @{ Old = "RUSHTD" ; New = "RushTD" },
+        @{ Old = "SACKS"  ; New = "Sack" },
+        @{ Old = "TGT"    ; New = "Tgt" },
+        @{ Old = "Y/A"    ; New = "YdsPerAtt" },
+        @{ Old = "Y/R"    ; New = "YdsPerRec" }
+      )
+
+      foreach ( $ThisReplace in $Replaces ) {
+        if ( $ThisStatKey -eq $ThisReplace.Old ) {
+          $ThisStatKey = $ThisReplace.New
+        }
+      }
+
+      # Add this as part of the StatKeys array
       $ThisStatKey
 
     } # End block:foreach ThisStat in StatHeaderItems
 
+    $RowCounter = 0
     $RowSize = $StatHeader.count
     $PlayerStatsHash = foreach ( $ThisRow in $Rows ) {
-      # Skip the header rows
-      if ( $ThisRow -eq $Rows[0] ) {
-        continue
-      }
-      if ( $ThisRow -eq $Rows[1] ) {
+      # Skip the 2 header rows
+      if ( $RowCounter++ -in (0..1) ) {
         continue
       }
 
@@ -158,7 +199,7 @@ function Get-FantasyProStat {
           Default { $RawValue -replace ".*=center>(.*)</TD>.*",'$1' }
         }
 
-        if ( $StatKey -notin ("Player", "ROST") ) {
+        if ( $StatKey -notin ("Name", "Rost") ) {
           $Value = $value -as [float]
         }
 
