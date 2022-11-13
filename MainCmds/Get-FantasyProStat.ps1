@@ -1,15 +1,17 @@
 <#
 .SYNOPSIS
-Pulls NFL stats from the Fantasy Pros website
+Scraps weekly NFL stats from the Fantasy Pros website
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 20221031-A
+VersionCode: 20221113-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
   param (
-    [Parameter(Mandatory)]
+    [Parameter(
+      Mandatory
+    )]
     [ValidateSet(
       "QB",
       "RB",
@@ -20,34 +22,54 @@ function Get-FantasyProStat {
     [string]
     $Position,
 
-    [Parameter(Mandatory)]
-    [ValidateRange(1, 18)]
+    [Parameter(
+      Mandatory
+    )]
+    [ValidateRange(
+      1, 18
+    )]
     [Alias("W")]
     [int]
-    $Week
-  ) # End block:param
+    $Week,
+
+    # Defaults to the current NFL year if the current month is Sep -> Jan
+    [Alias("Y")]
+    [int]
+    $Year
+    ) # End block:param
 
   process {
-    # Example URI
-    # https://www.fantasypros.com/nfl/stats/rb.php?week=6&scoring=HALF&range=week
+    <#
+    Example URI
+    https://www.fantasypros.com/nfl/stats/qb.php?year=2021&week=17&range=week&scoring=HALF
+    #>
     $BaseSite = "https://www.fantasypros.com/nfl/stats/"
+
+    $StatYear = Format-StatYear $Year
 
     $UriParams = @(
       $BaseSite,
       $Position.ToLower(),
+      $StatYear,
       $Week
     )
-    $URI = "{0}{1}.php?scoring=HALF&range=week&week={2}" -f $UriParams
+    $URI = "{0}{1}.php?scoring=HALF&year={2}&range=week&week={3}" -f $UriParams
 
     try {
       $Response = Invoke-WebRequest -URI $URI
     } catch {
       $ErrorDetails = @{
-        Message = "Failed to call the URI(" + $URI + ")"
+        Message = "Failed to properly call the URI(" + $URI + ")"
         ErrorAction = "Stop"
       }
 
       Write-Error $ErrorDetails
+    }
+
+    $ResponseStatus = $Response.StatusCode
+    if ( $ResponseStatus -ne "200" ) {
+      $WarningMsg = "Status code -ne 200; instead, it was " + $ResponseStatus
+      Write-Warning $WarningMsg
     }
 
     $HTML = $Response.ParsedHtml
