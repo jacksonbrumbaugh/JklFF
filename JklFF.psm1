@@ -1,7 +1,7 @@
 <#
 NOTES
 Created by Jackson Brumbaugh on ?
-VersionCode: 20221110-A
+VersionCode: 2022Dec24-A
 #>
 $ModulePath = $PSScriptRoot
 
@@ -10,8 +10,7 @@ $NonExportFolders = @(
 )
 
 $ExportFolders = @(
-  "MainCmds",
-  "UnderDevCmds"
+  "MainCmds"
 )
 
 $LoadDirectories = @(
