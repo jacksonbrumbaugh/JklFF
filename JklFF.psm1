@@ -1,7 +1,7 @@
 <#
-NOTES
+.NOTES
 Created by Jackson Brumbaugh on ?
-VersionCode: 2022Dec24-A
+VersionCode: 23Jan14-A
 #>
 $ModulePath = $PSScriptRoot
 
@@ -10,7 +10,8 @@ $NonExportFolders = @(
 )
 
 $ExportFolders = @(
-  "MainCmds"
+  "MainCmds",
+  "UnderDev"
 )
 
 $LoadDirectories = @(
@@ -42,20 +43,3 @@ foreach ( $ThisDir in $LoadDirectories ) {
   }
 
 }
-
-<#
-$LoadDirectories | ForEach-Object {
-  Get-ChildItem $_\*.ps1 | ForEach-Object {
-    . $_.FullName
-  }
-}
-#>
-
-<#
-$ExportDirectories | ForEach-Object {
-  Get-ChildItem $_\*.ps1 | ForEach-Object {
-    $FunctionName = $_.BaseName
-    Export-ModuleMember -Function $FunctionName
-  }
-}
-#>
