@@ -4,7 +4,7 @@ Scraps weekly NFL stats from the Fantasy Pros website
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 20221113-D
+VersionCode: 23Jan15-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -45,7 +45,7 @@ function Get-FantasyProStat {
     #>
     $BaseSite = "https://www.fantasypros.com/nfl/stats/"
 
-    $StatYear = Format-StatYear $Year
+    $StatYear = Get-StatYear $Year
 
     $UriParams = @(
       $BaseSite,
@@ -55,9 +55,8 @@ function Get-FantasyProStat {
     )
     $URI = "{0}{1}.php?scoring=HALF&year={2}&range=week&week={3}" -f $UriParams
 
-    try {
-      $Response = Invoke-WebRequest -URI $URI
-    } catch {
+    try { $Response = Invoke-WebRequest -URI $URI }
+    catch {
       $ErrorDetails = @{
         Message = "Failed to properly call the URI(" + $URI + ")"
         ErrorAction = "Stop"
@@ -220,10 +219,13 @@ function Get-FantasyProStat {
           Value      = $ThisPlayer.$ThisStat
         }
 
+        # Could clean this section up with a type coersion [Hashtable] -> [PSCustomObject]
         $PlayerStatsObject | Add-Member @MemberDetails
+
       }
 
       $PlayerStatsObject
+
     }
 
     Write-Output $OutputStats
@@ -233,7 +235,7 @@ function Get-FantasyProStat {
 } # End function
 
 $Aliases = @(
-  "gs"
+  "stat"
 )
 
 foreach ( $ThisAlias in $Aliases ) {
