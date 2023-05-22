@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-Scraps weekly NFL stats from the Fantasy Pros website
+Scraps weekly NFL stats (defaulting to Standard - no PPR - scoring) from the Fantasy Pros website, 
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 23Jan15-A
+VersionCode: 2023May21-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -18,9 +18,22 @@ function Get-FantasyProStat {
       "WR",
       "TE"
     )]
-    [Alias("P")]
     [string]
     $Position,
+
+    [ValidateSet(
+      "PPR",
+      "P",
+      "HALF",
+      "HPR",
+      "H",
+      "Standard",
+      "Std",
+      "Stan",
+      "S"
+    )]
+    [Alias("Score")]
+    $Scoring,
 
     [Parameter(
       Mandatory
@@ -28,12 +41,14 @@ function Get-FantasyProStat {
     [ValidateRange(
       1, 18
     )]
-    [Alias("W")]
+    [Alias("Wk")]
     [int]
     $Week,
 
-    # Defaults to the current NFL year if the current month is Sep -> Jan
-    [Alias("Y")]
+    # Defaults to the current NFL year if the current month is Sep -> Dec
+    [ValidateRange(
+      2002, 2102 # Arbitrarily picked 100 years from lowest value shown on the Fantasy Pro's site
+    )]
     [int]
     $Year
     ) # End block:param
@@ -53,7 +68,15 @@ function Get-FantasyProStat {
       $StatYear,
       $Week
     )
-    $URI = "{0}{1}.php?scoring=HALF&year={2}&range=week&week={3}" -f $UriParams
+    $URI = "{0}{1}.php?year={2}&range=week&week={3}" -f $UriParams
+
+    switch -Regex ($Scoring) {
+      "^P" { $URI += "&scoring=PPR" }
+
+      "^H" { $URI += "&scoring=HALF" }
+
+      # Standard scording does not get a URI query parameter for scoring
+    }
 
     try { $Response = Invoke-WebRequest -URI $URI }
     catch {
@@ -205,6 +228,9 @@ function Get-FantasyProStat {
         $Stats[$StatKey] = $Value
 
       } # End block:for RowContent
+
+      $Stats.Week = $Week
+      $Stats.Pos = $Position
 
       $Stats
 
