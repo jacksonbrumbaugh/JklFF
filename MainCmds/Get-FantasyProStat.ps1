@@ -110,15 +110,32 @@ function Get-FantasyProStat {
       $StatNoSmall = $ThisStat -replace "<SMALL>", "" -replace "</SMALL>", ""
       $StatName = $StatNoSmall -replace ".*TH.*>(.+)</TH.*", '$1'
 
+      Write-Verbose "Stat Name: $StatName"
+
       $ThisStatKey = $StatName
 
       if ( $StatName -eq "YDS" ) {
         $ThisStatKey = switch ( $PriorStatName ) {
-          "PCT" { "PASS" + $StatName } # For QB
+          "CMP" { "PASS" + $StatName } # For QB
           "ATT" { "RUSH" + $StatName } # For RB
           "TGT" { "REC" + $StatName }  # For WR & TE
           Default { $StatName }
         }
+      }
+
+      if ( $StatName -eq "ATT" ) {
+        # Passing attempts were not coming thru for QB
+        if ( $Position -eq "QB" ) {
+          $ThisStatKey = switch ( $PriorStatName ) {
+            "CMP"   { "PASS" + $StatName }
+            "SACKS" { "RUSH" + $StatName }
+          }
+        }
+
+        if ( $Position -eq "RB" ) {
+          $ThisStatKey = "RUSHATT"
+        }
+
       }
 
       if ( $StatName -eq "TD" ) {
@@ -159,29 +176,31 @@ function Get-FantasyProStat {
       $PriorStatName = $StatName
 
       $Replaces = @(
-        @{ Old = "20+"    ; New = "Over20" },
-        @{ Old = "ATT"    ; New = "Rush" },
-        @{ Old = "CMP"    ; New = "Comp" },
-        @{ Old = "FL"     ; New = "Fum" },
-        @{ Old = "FPTS"   ; New = "Pts" },
-        @{ Old = "FPTS/G" ; New = "AvgPts" },
-        @{ Old = "G"      ; New = "Games" },
-        @{ Old = "INT"    ; New = "Int" },
-        @{ Old = "LG"     ; New = "Long" },
-        @{ Old = "PASSTD" ; New = "PassTD" },
-        @{ Old = "PASSYDS"; New = "PassYds" },
-        @{ Old = "PCT"    ; New = "Perc" },
-        @{ Old = "Player" ; New = "Name" },
-        @{ Old = "REC"    ; New = "Rec" },
-        @{ Old = "RECTD"  ; New = "RecTD" },
-        @{ Old = "RECYDS" ; New = "RecYds" },
-        @{ Old = "ROST"   ; New = "Rost" },
-        @{ Old = "RUSHYDS"; New = "RushYds" },
-        @{ Old = "RUSHTD" ; New = "RushTD" },
-        @{ Old = "SACKS"  ; New = "Sack" },
-        @{ Old = "TGT"    ; New = "Tgt" },
-        @{ Old = "Y/A"    ; New = "YdsPerAtt" },
-        @{ Old = "Y/R"    ; New = "YdsPerRec" }
+        @{ Old = "20+"     ; New = "Over20" },
+        @{ Old = "ATT"     ; New = "Rush" },
+        @{ Old = "RUSHATT" ; New = "Att" },
+        @{ Old = "PASSATT" ; New = "PassAtt" },
+        @{ Old = "CMP"     ; New = "Comp" },
+        @{ Old = "FL"      ; New = "Fum" },
+        @{ Old = "FPTS"    ; New = "Pts" },
+        @{ Old = "FPTS/G"  ; New = "AvgPts" },
+        @{ Old = "G"       ; New = "Games" },
+        @{ Old = "INT"     ; New = "Int" },
+        @{ Old = "LG"      ; New = "Long" },
+        @{ Old = "PASSTD"  ; New = "PassTD" },
+        @{ Old = "PASSYDS" ; New = "PassYds" },
+        @{ Old = "PCT"     ; New = "Perc" },
+        @{ Old = "Player"  ; New = "Name" },
+        @{ Old = "REC"     ; New = "Rec" },
+        @{ Old = "RECTD"   ; New = "RecTD" },
+        @{ Old = "RECYDS"  ; New = "RecYds" },
+        @{ Old = "ROST"    ; New = "Rost" },
+        @{ Old = "RUSHYDS" ; New = "RushYds" },
+        @{ Old = "RUSHTD"  ; New = "RushTD" },
+        @{ Old = "SACKS"   ; New = "Sack" },
+        @{ Old = "TGT"     ; New = "Tgt" },
+        @{ Old = "Y/A"     ; New = "YdsPerAtt" },
+        @{ Old = "Y/R"     ; New = "YdsPerRec" }
       )
 
       foreach ( $ThisReplace in $Replaces ) {
@@ -216,14 +235,24 @@ function Get-FantasyProStat {
         $RawValue = $RowContent[$i]
 
         $Value = switch ( $i ) {
-          0 { $RawValue -replace "<TD>(\d*)</TD>",'$1' }
-          1 { $RawValue -replace ".*fp-player-name=.(.+).></A.*",'$1' }
+          0 { $RawValue -replace "<TD>(\d*)</TD>",'$1' } # Player's Weekly Rank
+          1 {
+            $Stats["Team"] = $RawValue -replace ".*\((.+)\).*", '$1'
+
+            # E.g. <tr class="mpb-player-18562"><td>127</td><td class="player-label"><a href="/nfl/stats/gardner-minshew.php" class="player-name">Gardner Minshew II</a> (IND) <a href="#" aria-hidden="true" tabindex="-1" class="fp-player-link fp-id-18562" fp-player-name="Gardner Minshew II"></a></td><td class="center">0</td>
+
+            $RawValue -replace ".*player-name=.(.+).></A.*",'$1'
+          }
           Default { $RawValue -replace ".*=center>(.*)</TD>.*",'$1' }
         }
 
         if ( $StatKey -notin ("Name", "Rost") ) {
           $Value = $value -as [float]
         }
+
+        Write-Verbose "Stat Key: $StatKey"
+        Write-Verbose "Stat Value: $Value"
+        Write-Verbose ""
 
         $Stats[$StatKey] = $Value
 
