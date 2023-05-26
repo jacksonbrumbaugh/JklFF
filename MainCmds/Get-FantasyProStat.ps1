@@ -4,7 +4,7 @@ Scraps weekly NFL stats (defaulting to Standard - no PPR - scoring) from the Fan
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 2023May21-A
+VersionCode: 2023May26-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -230,6 +230,7 @@ function Get-FantasyProStat {
       } # End block:for RowContent
 
       $Stats.Week = $Week
+      $Stats.Year = $StatYear
       $Stats.Pos = $Position
 
       $Stats
