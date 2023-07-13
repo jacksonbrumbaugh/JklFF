@@ -1,0 +1,413 @@
+Set-Location J:
+to fan*
+$BestBall = GC 2022*Analysis.json | ConvertFrom-JSON
+$BestBall
+$BestBall.Team
+$BestBall.Team[0]
+($BestBall.Team[0].QB | Measure -Sum).Sum
+$TotalPoints = 0; foreach ( $Pos in ("QB", "RB", "WR", "TE") ) { $TotalPoints += ($BestBall.Team[0].$Pos | Measure -Sum).Sum }; $TotalPoints
+$TotalPoints = 0; foreach ( $Pos in ("QB", "RB", "WR", "TE") ) { $TotalPoints += ($BestBall.Team[1].$Pos | Measure -Sum).Sum }; $TotalPoints
+$BestBall.Team[1]
+function Compare-Total ( $N ) {
+$BestBall = GC 2022*analysis.json | ConvertFrom-JSON
+$BestBall.Team[$N] | Select Name, Total | FL
+Write-Host
+$TotalPoints = 0
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) { $TotalPoints += ($BestBall.Team[$N].$Pos | Measure -Sum).Sum }
+"Added up position points: {0}" -f $TotalPoints
+Write-Host ""
+if ( $TotalPoints -ne $BestBall.Team[$N].Total ) {
+Write-Warning "Those totals do not match! Must have made a data entry mistake. "
+Write-Host ""
+}
+}
+Compare-total 1
+function Compare-Total ( $N ) {
+$BestBall = GC 2022*analysis.json | ConvertFrom-JSON
+$FocusTeam = $BestBall.Team[$N]
+Write-Host ""
+$FocusTeam.Name
+$FocusTeam.Total
+Write-Host
+$TotalPoints = 0
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) { $TotalPoints += ($BestBall.Team[$N].$Pos | Measure -Sum).Sum }
+"Added up position points: {0}" -f $TotalPoints
+Write-Host ""
+if ( $TotalPoints -ne $BestBall.Team[$N].Total ) {
+Write-Warning "Those totals do not match! Must have made a data entry mistake. "
+Write-Host ""
+}
+}
+Compare-total 1
+Compare-total 0
+Compare-total 1
+Compare-total 1
+cls
+$i = 0
+Compare-total $i++
+$i
+Compare-total 0
+Compare-total ($i++)
+Compare-total ($i++)
+cls
+Compare-total ($i++)
+function Compare-Total ( $N ) {
+cls
+$BestBall = GC 2022*analysis.json | ConvertFrom-JSON
+$FocusTeam = $BestBall.Team[$N]
+Write-Host ""
+$FocusTeam.Name
+$FocusTeam.Total
+Write-Host
+$TotalPoints = 0
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) { $TotalPoints += ($BestBall.Team[$N].$Pos | Measure -Sum).Sum }
+"Added up position points: {0}" -f $TotalPoints
+Write-Host ""
+if ( $TotalPoints -ne $BestBall.Team[$N].Total ) {
+Write-Warning "Those totals do not match! Must have made a data entry mistake. "
+Write-Host ""
+}
+}
+Compare-total ($i++)
+Compare-total ($i++)
+$I
+Compare-total 5
+$i = 4
+Compare-total ($i++)
+Compare-total ($i++)
+$i
+Compare-total ($i++)
+$Bestball.Team.Count
+function Compare-Total ( $N ) {
+cls
+$global:BestBall = GC 2022*analysis.json | ConvertFrom-JSON
+$FocusTeam = $BestBall.Team[$N]
+Write-Host ""
+$FocusTeam.Name
+$FocusTeam.Total
+Write-Host
+$TotalPoints = 0
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) { $TotalPoints += ($BestBall.Team[$N].$Pos | Measure -Sum).Sum }
+"Added up position points: {0}" -f $TotalPoints
+Write-Host ""
+if ( $TotalPoints -ne $BestBall.Team[$N].Total ) {
+Write-Warning "Those totals do not match! Must have made a data entry mistake. "
+Write-Host ""
+}
+}
+Compare-total 6
+$BestBall.Team.Count
+$BestBall.Team | Select Name, Entry, Prize, Total
+$BestBall.Team | Select Name, Entry, Prize, Total | Sort -D Total
+foreach ( $ThisTeam in $BestBall.Team ) {
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $ThisTeam.Total
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+Count = [PSCustomObject]@{ QB = $ThisTeam.QB.Count; RB = $ThisTeam.RB.Count; WR = $ThisTeam.WR.Count; TE = $ThisTeam.TE }
+}
+}
+foreach ( $ThisTeam in $BestBall.Team ) {
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $ThisTeam.Total
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+Count = [PSCustomObject]@{ QB = $ThisTeam.QB.Count; RB = $ThisTeam.RB.Count; WR = $ThisTeam.WR.Count; TE = $ThisTeam.TE }
+}
+} | FL
+foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $ThisTeam.Total
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+Count = [PSCustomObject]@{ QB = $ThisTeam.QB.Count; RB = $ThisTeam.RB.Count; WR = $ThisTeam.WR.Count; TE = $ThisTeam.TE }
+}
+}
+foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $ThisTeam.Total
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+Count = [PSCustomObject]@{ QB = $ThisTeam.QB.Count; RB = $ThisTeam.RB.Count; WR = $ThisTeam.WR.Count; TE = $ThisTeam.TE.Count }
+}
+}
+foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $ThisTeam.Total
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+Count = [PSCustomObject]@{ QB = $ThisTeam.QB.Count; RB = $ThisTeam.RB.Count; WR = $ThisTeam.WR.Count; TE = $ThisTeam.TE.Count }
+}
+} | FL
+$PosBreakDown = foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $ThisTeam.Total
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+Count = [PSCustomObject]@{ QB = $ThisTeam.QB.Count; RB = $ThisTeam.RB.Count; WR = $ThisTeam.WR.Count; TE = $ThisTeam.TE.Count }
+}
+}
+$PosBreakDown | FL
+$PosBreakDown | FT
+$PosBreakDown | SOrt -D Total | FT
+$PosBreakDown = foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+$TotalPoints = $ThisTeam.Total
+$PosTotal = @{
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+}
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $TotalPoints
+CountQB = $ThisTeam.QB.Count
+QB = $PosTotal.QB
+PerQB = $PosTotal.QB / $TotalPoints
+CountRB = $ThisTeam.RB.Count
+RB = Get-PosTotal RB
+PerRB = $PosTotal.RB / $TotalPoints
+CountWR = $ThisTeam.WR.Count
+WR = Get-PosTotal WR
+PerWR = $PosTotal.WR / $TotalPoints
+CountTE = $ThisTeam.TE.Count
+TE = Get-PosTotal TE
+PerTE = $PosTotal.TE / $TotalPoints
+}
+}
+$posBreakDown
+$posBreakDown | FT
+$PosBreakDown = foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+$TotalPoints = $ThisTeam.Total
+$PosTotal = @{
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+}
+function Get-PosPer ( $Pos ) {
+[math]::Round( $PosTotal.$Pos / $TotalPoints, 3 )
+}
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $TotalPoints
+CountQB = $ThisTeam.QB.Count
+QB = $PosTotal.QB
+PerQB = Get-PosPer QB
+CountRB = $ThisTeam.RB.Count
+RB = Get-PosTotal RB
+PerRB = Get-PosPer RB
+CountWR = $ThisTeam.WR.Count
+WR = Get-PosTotal WR
+PerWR = Get-PosPer WR
+CountTE = $ThisTeam.TE.Count
+TE = Get-PosTotal TE
+PerTE = Get-PosPer TE
+}
+}
+$posBreakDown | FT
+$PosBreakDown = foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+$TotalPoints = $ThisTeam.Total
+$PosTotal = @{
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+}
+function Get-PosPer ( $Pos ) {
+[math]::Round( $PosTotal.$Pos / $TotalPoints, 2 )
+}
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $TotalPoints
+CountQB = $ThisTeam.QB.Count
+QB = $PosTotal.QB
+PerQB = Get-PosPer QB
+CountRB = $ThisTeam.RB.Count
+RB = Get-PosTotal RB
+PerRB = Get-PosPer RB
+CountWR = $ThisTeam.WR.Count
+WR = Get-PosTotal WR
+PerWR = Get-PosPer WR
+CountTE = $ThisTeam.TE.Count
+TE = Get-PosTotal TE
+PerTE = Get-PosPer TE
+}
+}
+$posBreakDown | FT
+$PosBreakDown = foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+$TotalPoints = $ThisTeam.Total
+$PosTotal = @{
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+}
+function Get-PosPer ( $Pos ) {
+[math]::Round( $PosTotal.$Pos / $TotalPoints, 2 )
+}
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $TotalPoints
+QB = $PosTotal.QB
+CountQB = $ThisTeam.QB.Count
+PerQB = Get-PosPer QB
+RB = Get-PosTotal RB
+CountRB = $ThisTeam.RB.Count
+PerRB = Get-PosPer RB
+WR = Get-PosTotal WR
+CountWR = $ThisTeam.WR.Count
+PerWR = Get-PosPer WR
+TE = Get-PosTotal TE
+CountTE = $ThisTeam.TE.Count
+PerTE = Get-PosPer TE
+}
+}
+$posBreakDown | FT
+$posBreakDown | Sort -D Total | FT
+$PosBreakDown.TE
+$posBreakDown | Select * | Sort -D Total | FT
+$posBreakDown | Select Name, Total, QB, RB, WR, TE, Per* | Sort -D Total | FT
+$PosBreakDown | Out-GridView
+$PosBreakDown | % {
+$_.Total * $_.PerTE
+}
+$PosBreakDown = foreach ( $ThisTeam in $BestBall.Team ) {
+if ( [string]::IsNullOrEmpty($ThisTeam.Name) ) { continue }
+function Get-PosTotal ($Pos) { $ThisTeam.$Pos | Measure -Sum | Select -Expand Sum }
+$TotalPoints = $ThisTeam.Total
+$PosTotal = @{
+QB = Get-PosTotal QB
+RB = Get-PosTotal RB
+WR = Get-PosTotal WR
+TE = Get-PosTotal TE
+}
+[PSCustomObject]@{
+Name = $ThisTeam.Name
+Total = $TotalPoints
+CountQB = $ThisTeam.QB.Count
+QB = $PosTotal.QB
+PerQB = $PosTotal.QB / $TotalPoints
+CountRB = $ThisTeam.RB.Count
+RB = Get-PosTotal RB
+PerRB = $PosTotal.RB / $TotalPoints
+CountWR = $ThisTeam.WR.Count
+WR = Get-PosTotal WR
+PerWR = $PosTotal.WR / $TotalPoints
+CountTE = $ThisTeam.TE.Count
+TE = Get-PosTotal TE
+PerTE = $PosTotal.TE / $TotalPoints
+}
+}
+$PosBreakDown | % {
+$_.Total * $_.PerTE
+}
+$PosBreakDown | % {
+($_.Total -as [double]) * ($_.PerTE -as [double])
+}
+$PosBreakDown | % {
+($_.Total -as [double]) * ($_.PerTE -as [double])
+} | Sort -D
+$BestBall.Team | % {
+$_.TE | Measure -Sum | Select -Expand Sum
+}
+$BestBall.Team | % {
+$_.TE | Measure -Sum | Select -Expand Sum
+} | Sort -D
+$PosBreakDown
+$PosBreakDown.PerQB | Measure -Average
+Get-Command -Mod JklMath
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) {
+$PerKey = "Per{0}" -f $Pos
+$PerList = $PosBreakDown.$PerKey
+$Avg = $PerList | Measure -Average | Select -Expand Average
+$StdDev = Get-StdDev $PerList
+[PSCustomObject]@{
+Pos = $Pos
+Avg = $Avg
+SD = $StdDev
+}
+}
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) {
+$PerKey = "Per{0}" -f $Pos
+$PerList = $PosBreakDown.$PerKey | % { $_ -as [double] }
+$Avg = $PerList | Measure -Average | Select -Expand Average
+$StdDev = Get-StdDev $PerList
+[PSCustomObject]@{
+Pos = $Pos
+Avg = $Avg
+SD = $StdDev
+}
+}
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) {
+$PerKey = "Per{0}" -f $Pos
+$PerList = $PosBreakDown.$PerKey | % { $_ -as [double] }
+$Avg = $PerList | Measure -Average | Select -Expand Average
+$StdDev = Get-StdDev $PerList
+[PSCustomObject]@{
+Pos = $Pos
+Avg = $Avg
+SD = $StdDev
+}
+}
+Import-Module JklMath
+Import-Module JklMath -Force
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) {
+$PerKey = "Per{0}" -f $Pos
+$PerList = $PosBreakDown.$PerKey
+$Avg = $PerList | Measure -Average | Select -Expand Average
+$StdDev = Get-StdDev $PerList
+[PSCustomObject]@{
+Pos = $Pos
+Avg = $Avg
+SD = $StdDev
+}
+}
+foreach ( $Pos in ("QB", "RB", "WR", "TE") ) {
+$PerKey = "Per{0}" -f $Pos
+$PerList = $PosBreakDown.$PerKey | % { $_ -as [double] }
+$Avg = $PerList | Measure -Average | Select -Expand Average
+$StdDev = Get-StdDev $PerList
+[PSCustomObject]@{
+Pos = $Pos
+Avg = [math]::Round($Avg, 3)
+SD = [math]::Round($StdDev, 4)
+}
+}
+
