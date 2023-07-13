@@ -1,0 +1,131 @@
+cd *Foot*
+dir
+cd Best*
+dir
+to Draft*
+dir
+$Raw = GC *raw*
+$Raw[0..10]
+$Raw[0..15]
+$Raw[0..20]
+$Raw[20..40]
+$Start = 10; $Raw[$Start .. ($Start + 15)]
+$Start = 17; $Raw[$Start .. ($Start + 15)]
+$Start = 19; $Raw[$Start .. ($Start + 15)]
+$Start = 19; $Raw[$Start .. ($Start + 30)]
+$Users = [ordered]@{}; $UserIndex = 0; foreach ( $ThisRow in $Raw ) {
+if ( $ThisRow -eq "userAvatar" ) {
+$UserIndex++
+$Users[$UserIndex] = @()
+continue
+}
+
+if ( $UserIndex -gt 0 ) {
+$AddRow = -not [string]::IsNullOrEmpty($ThisRow)
+if ( $AddRow ) { $Users[$UserIndex] += $ThisRow }
+}
+}
+$UserIndex
+$Users
+$Users = [ordered]@{}; $UserIndex = 0; foreach ( $ThisRow in $Raw ) {
+if ( $ThisRow -eq "userAvatar" ) {
+$UserIndex++
+$Users.$UserIndex = @()
+continue
+}
+
+if ( $UserIndex -gt 0 ) {
+$AddRow = -not [string]::IsNullOrEmpty($ThisRow)
+if ( $AddRow ) { $Users.$UserIndex += $ThisRow }
+}
+}
+$Users
+$Users.1
+$Users | GM
+$Users.GetType()
+$Users
+$Users = [ordered]@{}; $UserIndex = 0; foreach ( $ThisRow in $Raw ) {
+if ( $ThisRow -eq "userAvatar" ) {
+if ( $InfoRows.Count -gt 0 ) { $Users.$UserIndex = $InfoRows }
+$InfoRows = @()
+continue
+}
+
+if ( $UserIndex -gt 0 ) {
+$AddRow = -not [string]::IsNullOrEmpty($ThisRow)
+if ( $AddRow ) { $InfoRows += $ThisRow }
+}
+}
+$Users
+$Users = [ordered]@{}; $UserIndex = 0; foreach ( $ThisRow in $Raw ) {
+if ( $ThisRow -eq "userAvatar" ) {
+if ( $InfoRows.Count -gt 0 ) { $Users.$UserIndex = $InfoRows }
+$UserIndex++
+$InfoRows = @()
+continue
+}
+
+if ( $UserIndex -gt 0 ) {
+$AddRow = -not [string]::IsNullOrEmpty($ThisRow)
+if ( $AddRow ) { $InfoRows += $ThisRow }
+}
+}
+$Users
+$Users.1
+$Users."1"
+$Users."1"[0..3]
+$Users."1"[1..]
+$Users."1"[1..4]
+$Start = 1; $Users."1"[$Start .. ($Start + 4)]
+$Start = 1; $Users."1"[$Start .. ($Start + 3)]
+$n = 0; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n = 1; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."1"[$Start .. ($Start + 3)]
+$n = 0; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+$n++; $Start = 1 + 4*$n; $Users."8"[$Start .. ($Start + 3)]
+cd ../
+cd /..
+dir
+cd Code
+dir
+cd Power*
+dir
+cd My*
+dir
+cd *FF*
+dir
+cd Raw
+dir
