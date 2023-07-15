@@ -63,7 +63,7 @@ function Import-DraftBoard {
 
           $ThisPick = $RawDraft[$Start .. $End]
 
-          $PickNumber = $ThisPick[0]
+          $PickNumber = $ThisPick[0] -as [int]
           $PlayerFirstName = $ThisPick[1]
           $PlayerLastName = $ThisPick[2]
           $BottomLineSplit = ($ThisPick[3] -replace " - ", " ") -split " "
