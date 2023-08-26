@@ -4,7 +4,7 @@ Scraps weekly NFL stats (defaulting to Standard - no PPR - scoring) from the Fan
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 2023May26-A
+VersionCode: 2023Aug25-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -12,13 +12,7 @@ function Get-FantasyProStat {
     [Parameter(
       Mandatory
     )]
-    [ValidateSet(
-      "QB",
-      "RB",
-      "WR",
-      "TE"
-    )]
-    [string]
+    [Position]
     $Position,
 
     [ValidateSet(
@@ -51,7 +45,8 @@ function Get-FantasyProStat {
     )]
     [int]
     $Year
-    ) # End block:param
+
+  ) # End block:param
 
   process {
     <#
@@ -81,7 +76,7 @@ function Get-FantasyProStat {
     try { $Response = Invoke-WebRequest -URI $URI }
     catch {
       $ErrorDetails = @{
-        Message = "Failed to properly call the URI(" + $URI + ")"
+        Message = "Failed to return the WebRequest from the URI(" + $URI + ")"
         ErrorAction = "Stop"
       }
 
