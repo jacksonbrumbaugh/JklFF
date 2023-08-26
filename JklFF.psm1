@@ -1,9 +1,16 @@
 <#
 .NOTES
 Created by Jackson Brumbaugh on ?
-VersionCode: 23Jan14-A
+Version: 2023Aug25-A
 #>
 $ModulePath = $PSScriptRoot
+
+enum Position {
+  QB
+  RB
+  WR
+  TE
+}
 
 $NonExportFolders = @(
   "HelperCmds"
