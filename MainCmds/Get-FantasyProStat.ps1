@@ -1,10 +1,10 @@
 <#
 .SYNOPSIS
-Scraps weekly NFL stats (defaulting to Standard - no PPR - scoring) from the Fantasy Pros website, 
+Scraps weekly NFL stats (default Half PPR scoring) from the Fantasy Pros website
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 2023Aug25-A
+VersionCode: 2023Sep14-A
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
@@ -20,6 +20,7 @@ function Get-FantasyProStat {
       "P",
       "HALF",
       "HPR",
+      "HPPR",
       "H",
       "Standard",
       "Std",
@@ -27,7 +28,7 @@ function Get-FantasyProStat {
       "S"
     )]
     [Alias("Score")]
-    $Scoring,
+    $Scoring = "HPPR",
 
     [Parameter(
       Mandatory
@@ -48,7 +49,7 @@ function Get-FantasyProStat {
 
   ) # End block:param
 
-  process {
+  begin {
     <#
     Example URI
     https://www.fantasypros.com/nfl/stats/qb.php?year=2021&week=17&range=week&scoring=HALF
@@ -57,9 +58,15 @@ function Get-FantasyProStat {
 
     $StatYear = Get-StatYear $Year
 
+    $Pos_AsString = $Position -as [string]
+    Write-Verbose "Getting Fantasy Pro stats for the position $($Pos_AsString)"
+
+  } # End block:begin
+
+  process {
     $UriParams = @(
       $BaseSite,
-      $Position.ToLower(),
+      $Pos_AsString.ToLower(),
       $StatYear,
       $Week
     )
@@ -73,6 +80,7 @@ function Get-FantasyProStat {
       # Standard scording does not get a URI query parameter for scoring
     }
 
+    Write-Verbose "Invoking a WebRequest to the Fantasy Pros website"
     try { $Response = Invoke-WebRequest -URI $URI }
     catch {
       $ErrorDetails = @{
@@ -89,12 +97,18 @@ function Get-FantasyProStat {
       Write-Warning $WarningMsg
     }
 
+    Write-Verbose "Parsing out tables from the WebRequest"
     $HTML = $Response.ParsedHtml
     $Tables = $Html.GetElementsByTagName( 'table' )
+
+    Write-Verbose "Parsing out rows from the table"
     $Rows = $Tables[0].Rows
     $StatHeader = $Rows[1]
+
+    Write-Verbose "Parsing out the stat header items"
     $StatHeaderItems = $StatHeader.InnerHtml.split("`n")
 
+    Write-Verbose "Processing each Stat"
     <#
     Using the Prior Stat Name as a guide for what the current stat name will be
     Example
@@ -120,21 +134,21 @@ function Get-FantasyProStat {
 
       if ( $StatName -eq "ATT" ) {
         # Passing attempts were not coming thru for QB
-        if ( $Position -eq "QB" ) {
+        if ( $Pos_AsString -eq "QB" ) {
           $ThisStatKey = switch ( $PriorStatName ) {
             "CMP"   { "PASS" + $StatName }
             "SACKS" { "RUSH" + $StatName }
           }
         }
 
-        if ( $Position -eq "RB" ) {
+        if ( $Pos_AsString -eq "RB" ) {
           $ThisStatKey = "RUSHATT"
         }
 
       }
 
       if ( $StatName -eq "TD" ) {
-        if ( $Position -eq "QB" ) {
+        if ( $Pos_AsString -eq "QB" ) {
           $ThisStatKey = switch ( $PriorStatName ) {
             "Y/A" {"PASS" + $StatName }
             "YDS" { "RUSH" + $StatName }
@@ -142,7 +156,7 @@ function Get-FantasyProStat {
           }
         }
 
-        if ( $Position -eq "RB" ) {
+        if ( $Pos_AsString -eq "RB" ) {
           $ThisStatKey = switch ( $PriorStatName ) {
             "20+" { "RUSH" + $StatName }
             "Y/R" { "REC" + $StatName }
@@ -150,7 +164,7 @@ function Get-FantasyProStat {
           }
         }
 
-        if ( $Position -in ("WR", "TE") ) {
+        if ( $Pos_AsString -in ("WR", "TE") ) {
           $ThisStatKey = switch ( $PriorStatName ) {
             "20+" { "REC" + $StatName }
             "YDS" { "RUSH" + $StatName }
@@ -161,7 +175,7 @@ function Get-FantasyProStat {
       } # End block:if StatName is TD
 
       if ( $StatName -eq "Y/A" ) {
-        $ThisStatKey = switch ( $Position ) {
+        $ThisStatKey = switch ( $Pos_AsString ) {
           "QB" { "YdsPerPass" }
           "RB" { "YdsPerRush" }
           Default { $ThisStatKey}
@@ -255,7 +269,7 @@ function Get-FantasyProStat {
 
       $Stats.Week = $Week
       $Stats.Year = $StatYear
-      $Stats.Pos = $Position
+      $Stats.Pos = $Pos_AsString
 
       $Stats
 
