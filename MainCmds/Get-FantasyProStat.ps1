@@ -4,7 +4,12 @@ Scraps weekly NFL stats (default Half PPR scoring) from the Fantasy Pros website
 
 .NOTES
 Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 2023Sep14-A
+VersionCode: 2023Oct12-JCB
+
+Looks like FantasyPros site must have done a redesign
+i *think* the stats should still be scrap-able
+but for speed reasons i may have to scrap from the *.Content property
+instead of the current approach of the *.ParsedHtml property
 #>
 function Get-FantasyProStat {
   [CmdletBinding()]
