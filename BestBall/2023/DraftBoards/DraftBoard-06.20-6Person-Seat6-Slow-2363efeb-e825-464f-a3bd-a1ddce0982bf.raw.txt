@@ -1,0 +1,902 @@
+Draft board
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+userAvatar
+FUTUREDYNASTY
+
+1
+
+Justin
+
+Jefferson
+
+WR - MIN (1.1)
+
+12
+
+Saquon
+
+Barkley
+
+RB - NYG (2.6)
+
+13
+
+Mark
+
+Andrews
+
+TE - BAL (3.1)
+
+24
+
+Jaylen
+
+Waddle
+
+WR - MIA (4.6)
+
+25
+
+DeVonta
+
+Smith
+
+WR - PHI (5.1)
+
+36
+
+Najee
+
+Harris
+
+RB - PIT (6.6)
+
+37
+
+Justin
+
+Herbert
+
+QB - LAC (7.1)
+
+48
+
+Trevor
+
+Lawrence
+
+QB - JAX (8.6)
+
+49
+
+Dallas
+
+Goedert
+
+TE - PHI (9.1)
+
+60
+
+Jerry
+
+Jeudy
+
+WR - DEN (10.6)
+
+61
+
+DJ
+
+Moore
+
+WR - CHI (11.1)
+
+72
+
+D'Andre
+
+Swift
+
+RB - PHI (12.6)
+
+73
+
+David
+
+Montgomery
+
+RB - DET (13.1)
+
+84
+
+James
+
+Conner
+
+RB - ARI (14.6)
+
+85
+
+Treylon
+
+Burks
+
+WR - TEN (15.1)
+
+96
+
+Brandin
+
+Cooks
+
+WR - DAL (16.6)
+
+97
+
+Javonte
+
+Williams
+
+RB - DEN (17.1)
+
+108
+
+Antonio
+
+Gibson
+
+RB - WAS (18.6)
+
+userAvatar
+IBNSINO
+
+2
+
+Travis
+
+Kelce
+
+TE - KC (1.2)
+
+11
+
+Jonathan
+
+Taylor
+
+RB - IND (2.5)
+
+14
+
+Patrick
+
+Mahomes
+
+QB - KC (3.2)
+
+23
+
+Derrick
+
+Henry
+
+RB - TEN (4.5)
+
+26
+
+Josh
+
+Jacobs
+
+RB - LV (5.2)
+
+35
+
+Deebo
+
+Samuel
+
+WR - SF (6.5)
+
+38
+
+Keenan
+
+Allen
+
+WR - LAC (7.2)
+
+47
+
+Christian
+
+Watson
+
+WR - GB (8.5)
+
+50
+
+J.K.
+
+Dobbins
+
+RB - BAL (9.2)
+
+59
+
+Terry
+
+McLaurin
+
+WR - WAS (10.5)
+
+62
+
+Chris
+
+Godwin
+
+WR - TB (11.2)
+
+71
+
+Cam
+
+Akers
+
+RB - LAR (12.5)
+
+74
+
+Michael
+
+Pittman
+
+WR - IND (13.2)
+
+83
+
+Jaxon
+
+Smith-Njigba
+
+WR - SEA (14.5)
+
+86
+
+Dalton
+
+Kincaid
+
+TE - BUF (15.2)
+
+95
+
+Dak
+
+Prescott
+
+QB - DAL (16.5)
+
+98
+
+Kirk
+
+Cousins
+
+QB - MIN (17.2)
+
+107
+
+Sam
+
+LaPorta
+
+TE - DET (18.5)
+
+userAvatar
+BRUCEWAIN
+
+3
+
+Ja'Marr
+
+Chase
+
+WR - CIN (1.3)
+
+10
+
+Stefon
+
+Diggs
+
+WR - BUF (2.4)
+
+15
+
+CeeDee
+
+Lamb
+
+WR - DAL (3.3)
+
+22
+
+Tony
+
+Pollard
+
+RB - DAL (4.4)
+
+27
+
+Tee
+
+Higgins
+
+WR - CIN (5.3)
+
+34
+
+Justin
+
+Fields
+
+QB - CHI (6.4)
+
+39
+
+George
+
+Kittle
+
+TE - SF (7.3)
+
+46
+
+Kenneth
+
+Walker
+
+RB - SEA (8.4)
+
+51
+
+Miles
+
+Sanders
+
+RB - CAR (9.3)
+
+58
+
+Mike
+
+Williams
+
+WR - LAC (10.4)
+
+63
+
+Darren
+
+Waller
+
+TE - NYG (11.3)
+
+70
+
+Brandon
+
+Aiyuk
+
+WR - SF (12.4)
+
+75
+
+Tyler
+
+Lockett
+
+WR - SEA (13.3)
+
+82
+
+Dalvin
+
+Cook
+
+RB - (14.4)
+
+87
+
+Rachaad
+
+White
+
+RB - TB (15.3)
+
+94
+
+Anthony
+
+Richardson
+
+QB - IND (16.4)
+
+99
+
+Michael
+
+Thomas
+
+WR - NO (17.3)
+
+106
+
+Daniel
+
+Jones
+
+QB - NYG (18.4)
+
+userAvatar
+DFERG110
+
+4
+
+Christian
+
+McCaffrey
+
+RB - SF (1.4)
+
+9
+
+A.J.
+
+Brown
+
+WR - PHI (2.3)
+
+16
+
+Davante
+
+Adams
+
+WR - LV (3.4)
+
+21
+
+Jalen
+
+Hurts
+
+QB - PHI (4.3)
+
+28
+
+Chris
+
+Olave
+
+WR - NO (5.4)
+
+33
+
+Joe
+
+Burrow
+
+QB - CIN (6.3)
+
+40
+
+T.J.
+
+Hockenson
+
+TE - MIN (7.4)
+
+45
+
+Aaron
+
+Jones
+
+RB - GB (8.3)
+
+52
+
+Kyle
+
+Pitts
+
+TE - ATL (9.4)
+
+57
+
+Dameon
+
+Pierce
+
+RB - HOU (10.3)
+
+64
+
+Marquise
+
+Brown
+
+WR - ARI (11.4)
+
+69
+
+Joe
+
+Mixon
+
+RB - CIN (12.3)
+
+76
+
+Kadarius
+
+Toney
+
+WR - KC (13.4)
+
+81
+
+Jahan
+
+Dotson
+
+WR - WAS (14.3)
+
+88
+
+George
+
+Pickens
+
+WR - PIT (15.4)
+
+93
+
+Devon
+
+Achane
+
+RB - MIA (16.3)
+
+100
+
+AJ
+
+Dillon
+
+RB - GB (17.4)
+
+105
+
+Greg
+
+Dulcich
+
+TE - DEN (18.3)
+
+userAvatar
+BENHURTS
+
+5
+
+Tyreek
+
+Hill
+
+WR - MIA (1.5)
+
+8
+
+Bijan
+
+Robinson
+
+RB - ATL (2.2)
+
+17
+
+Nick
+
+Chubb
+
+RB - CLE (3.5)
+
+20
+
+Josh
+
+Allen
+
+QB - BUF (4.2)
+
+29
+
+Breece
+
+Hall
+
+RB - NYJ (5.5)
+
+32
+
+DK
+
+Metcalf
+
+WR - SEA (6.2)
+
+41
+
+Amari
+
+Cooper
+
+WR - CLE (7.5)
+
+44
+
+Travis
+
+Etienne
+
+RB - JAX (8.2)
+
+53
+
+Calvin
+
+Ridley
+
+WR - JAX (9.5)
+
+56
+
+Christian
+
+Kirk
+
+WR - JAX (10.2)
+
+65
+
+Alexander
+
+Mattison
+
+RB - MIN (11.5)
+
+68
+
+Deshaun
+
+Watson
+
+QB - CLE (12.2)
+
+77
+
+Pat
+
+Freiermuth
+
+TE - PIT (13.5)
+
+80
+
+Mike
+
+Evans
+
+WR - TB (14.2)
+
+89
+
+Gabe
+
+Davis
+
+WR - BUF (15.5)
+
+92
+
+Jordan
+
+Addison
+
+WR - MIN (16.2)
+
+101
+
+Chigoziem
+
+Okonkwo
+
+TE - TEN (17.5)
+
+104
+
+Dalton
+
+Schultz
+
+TE - HOU (18.2)
+
+userAvatar
+JACKALBRUIT
+
+6
+
+Cooper
+
+Kupp
+
+WR - LAR (1.6)
+
+7
+
+Austin
+
+Ekeler
+
+RB - LAC (2.1)
+
+18
+
+Amon-Ra
+
+St. Brown
+
+WR - DET (3.6)
+
+19
+
+Garrett
+
+Wilson
+
+WR - NYJ (4.1)
+
+30
+
+Lamar
+
+Jackson
+
+QB - BAL (5.6)
+
+31
+
+Rhamondre
+
+Stevenson
+
+RB - NE (6.1)
+
+42
+
+Jahmyr
+
+Gibbs
+
+RB - DET (7.6)
+
+43
+
+DeAndre
+
+Hopkins
+
+WR - (8.1)
+
+54
+
+Drake
+
+London
+
+WR - ATL (9.6)
+
+55
+
+Evan
+
+Engram
+
+TE - JAX (10.1)
+
+66
+
+Tua
+
+Tagovailoa
+
+QB - MIA (11.6)
+
+67
+
+Diontae
+
+Johnson
+
+WR - PIT (12.1)
+
+78
+
+Isiah
+
+Pacheco
+
+RB - KC (13.6)
+
+79
+
+David
+
+Njoku
+
+TE - CLE (14.1)
+
+90
+
+Jameson
+
+Williams
+
+WR - DET (15.6)
+
+91
+
+Jared
+
+Goff
+
+QB - DET (16.1)
+
+102
+
+Zay
+
+Flowers
+
+WR - BAL (17.6)
+
+103
+
+James
+
+Cook
+
+RB - BUF (18.1)
+
