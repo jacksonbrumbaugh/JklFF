@@ -1,15 +1,25 @@
 <#
 .NOTES
-Created by Jackson Brumbaugh on ?
-Version: 2023Aug25-A
+Modified = @{
+  By   = Jackson Brumbaugh
+  Date = 2023-11-11
+}
 #>
+
 $ModulePath = $PSScriptRoot
+#$ModuleName = $ModulePath | Split-Path -Leaf
 
 enum Position {
   QB
   RB
   WR
   TE
+}
+
+enum ScoringFormat {
+  PPR
+  HPR
+  STD
 }
 
 $NonExportFolders = @(
@@ -50,3 +60,7 @@ foreach ( $ThisDir in $LoadDirectories ) {
   }
 
 }
+
+<#
+look up from McL modules how to quickly export Aliases that were initiated inside the function source code files
+#>
