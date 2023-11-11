@@ -1,10 +1,12 @@
 <#
 .SYNOPSIS
-Scraps weekly NFL stats (default Half PPR scoring) from the Fantasy Pros website
+Scraps weekly NFL stats from the Fantasy Pros website
 
 .NOTES
-Created on 2022-10-13 by Jackson Brumbaugh
-VersionCode: 2023Oct12-JCB
+Modified = @{
+  By   = Jackson Brumbaugh
+  Date = 2023-11-11
+}
 
 Looks like FantasyPros site must have done a redesign
 i *think* the stats should still be scrap-able
@@ -20,20 +22,9 @@ function Get-FantasyProStat {
     [Position]
     $Position,
 
-    [ValidateSet(
-      "PPR",
-      "P",
-      "HALF",
-      "HPR",
-      "HPPR",
-      "H",
-      "Standard",
-      "Std",
-      "Stan",
-      "S"
-    )]
-    [Alias("Score")]
-    $Scoring = "HPPR",
+    [ScoringFormat]
+    [Alias("ScoringFormat", "Score")]
+    $Format = "HPR",
 
     [Parameter(
       Mandatory
@@ -77,7 +68,7 @@ function Get-FantasyProStat {
     )
     $URI = "{0}{1}.php?year={2}&range=week&week={3}" -f $UriParams
 
-    switch -Regex ($Scoring) {
+    switch -Regex ( $Format ) {
       "^P" { $URI += "&scoring=PPR" }
 
       "^H" { $URI += "&scoring=HALF" }
